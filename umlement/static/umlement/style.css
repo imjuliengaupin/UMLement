@@ -12,7 +12,7 @@
 /* Control the left side */
 .left {
     left: 0;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 /* Control the right side */
@@ -28,4 +28,22 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+
+/* Manage content displayed for file upload and preview */
+.image-preview {
+    width: 300px;
+    min-height: 100px;
+    border: 2px solid white;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+.image-preview__image {
+    display: none;
+    width: 100%;
 }

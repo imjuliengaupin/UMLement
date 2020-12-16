@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 
 <head>
@@ -11,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
+    {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'umlement/style.css' %}">
 
     <title>UMLement</title>
@@ -19,15 +19,48 @@
 <body>
     <div class="split left">
         <div class="centered">
-            <p>left</p>
+            <input type="file" name="python_file" id="python_file">
         </div>
     </div>
 
     <div class="split right">
         <div class="centered">
-            <p>right</p>
+            <div class="image-preview" id="image_preview">
+                <img class="image-preview__image" src="" alt="UML Diagram">
+                <span class="image-preview__default-text">UML Diagram</span>
+            </div>
         </div>
     </div>
+
+    <script>
+        // https://www.youtube.com/watch?v=VElnT8EoEEM
+
+        const input = document.getElementById("python_file");
+        const preview_container = document.getElementById("image_preview");
+        const preview_image = preview_container.querySelector(".image-preview__image");
+        const preview_default_text = preview_container.querySelector(".image-preview__default-text");
+
+        input.addEventListener("change", function () {
+            const python_file = this.files[0];
+
+            if (python_file) {
+                const file_reader = new FileReader();
+                preview_default_text.style.display = "none";
+                preview_image.style.display = "block";
+
+                file_reader.addEventListener("load", function () {
+                    preview_image.setAttribute("src", this.result);
+                });
+
+                file_reader.readAsDataURL(python_file);
+            }
+            else {
+                preview_default_text.style.display = null;
+                preview_image.style.display = null;
+                preview_image.setAttribute("src", "");
+            }
+        });
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
